@@ -1,15 +1,35 @@
-.color-orange {
+.chart {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+
+.value {
+  display: inline-block;
+  vertical-align: -310px;
+}
+
+.label {
+
+}
+
+.bar {
+  float: left;
+  text-align: center;
+}
+
+.orange {
   background: orange;
 }
 
-.color-blue {
+.blue {
   background: blue;
 }
 
-.color-red {
+.red {
   background: red;
 }
 
-.color-green {
+.green {
   background: green;
 }
