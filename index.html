@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang = "en">
+  <head>
+    <meta charset="utf-8">
+    <title>Stretch Project-1</title>
+    <link rel="stylesheet" type="text/css" href="assets/stylesheets/main.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="./barChart.js"></script>
+    <script src="./assets/jquery/jquery-ui.js"></script>
+  </head>
+  <body>
+    <script type="text/javascript">
+      var data = [[40, 'value1'], [120, 'value2'], [280, 'value3'],
+                  [200, 'value4'], [80, 'value5'], [300, 'value6'],
+                  [50, 'value7'], [5, 'value8'], [190, 'value9'],
+                  [230, 'value10']];
+      $( function() {
+        drawBarChart(data, options, element);
+      });
+    </script>
+  </body>
+</html>
