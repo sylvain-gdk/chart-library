@@ -12,8 +12,19 @@
     <script type="text/javascript">
       var data = [[40, 'value1'], [120, 'value2'], [280, 'value3'],
                   [200, 'value4'], [80, 'value5'], [300, 'value6'],
-                  [50, 'value7'], [5, 'value8'], [190, 'value9'],
+                  [50, 'value7'], [65, 'value8'], [190, 'value9'],
                   [230, 'value10']];
+
+      var options = {
+        chartTitle: 'My Chart',
+        chartWidth: 500,
+        chartHeight: 400,
+        barSpacing: 3,
+        barColor: 'red',
+        barValueColor: 'white',
+        barLabelColor: 'black',
+        barValuePos: 0
+      };
 
       $( function() {
         drawBarChart(data, options);

@@ -2,22 +2,20 @@
   display: flex;
   justify-content: center;
   align-items: flex-end;
+  padding-top: 20px;
 }
 
 .value {
-  display: table-cell;
   position: absolute;
   left: 50%;
   transform: translate(-50%);
 }
 
 .label {
-  position: relative;
-  bottom: 30%
-  left: 50%;
-  transform: translate(-50%);
-  transform: rotate(45deg);
-  transform-origin: left top;
+  position: absolute;
+  right: 50%;
+  transform: rotate(-45deg);
+  transform-origin: right;
 }
 
 .bar {
@@ -40,4 +38,12 @@
 
 .green {
   background: green;
+}
+
+.black {
+  background: black;
+}
+
+.white {
+  background: white;
 }
