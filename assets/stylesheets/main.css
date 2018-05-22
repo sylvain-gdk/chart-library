@@ -1,21 +1,29 @@
 .chart {
   display: flex;
   justify-content: center;
-  align-items: baseline;
+  align-items: flex-end;
 }
 
 .value {
-  display: inline-block;
-  vertical-align: -310px;
+  display: table-cell;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
 }
 
 .label {
-
+  position: relative;
+  bottom: 30%
+  left: 50%;
+  transform: translate(-50%);
+  transform: rotate(45deg);
+  transform-origin: left top;
 }
 
 .bar {
+  position: relative;
   float: left;
-  text-align: center;
+
 }
 
 .orange {

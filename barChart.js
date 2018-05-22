@@ -5,26 +5,23 @@ var options = {
   barSpacing: 3,
   barColor: 'orange',
   barLabelColor: 'blue',
-  barValuePos: 'bottom'
+  barValuePos: 0
 };
 
 function drawBarChart(data, options, element){
-  var barClass = 'bar ' + options.barColor;
   var valueClass = 'value';
+  var valueStyle = 'bottom: ' + options.barValuePos + '%';
   var labelClass = 'label color-' + options.barLabelColor;
-  var valueTag = $( '<div>', {
-    'class': valueClass
-  });
-  var labelTag = $( '<div>', {
+  /*var labelTag = $( '<div>', {
     'class': labelClass
-  });
-
+  });*/
   var chartStyle = 'width: ' + options.chartWidth + 'px;' +
     ' height: ' + options.chartHeight + 'px';
   var body = $( 'body' );
   body.attr('class', 'chart ' + chartStyle);
 
   $.each( data, function( index, value ){
+    var barClass = 'bar ' + options.barColor;
     var barStyle =  'width: ' + ((options.chartWidth -
       (options.barSpacing * data.length)) / data.length) +
       'px; height: ' + value[0] + 'px; ' + 'margin: ' +
@@ -33,7 +30,11 @@ function drawBarChart(data, options, element){
       'class': barClass,
       'style': barStyle
     });
-    //valueTag.appendTo(barTag);
+    var valueTag = $( '<div>', {
+      'class': valueClass,
+      'style': valueStyle
+    }).html(value[0]);
+    valueTag.appendTo(barTag);
     //labelTag.appendTo(barTag);
     barTag.appendTo(body);
   });
