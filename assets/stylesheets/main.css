@@ -5,6 +5,12 @@
   padding-top: 20px;
 }
 
+.title {
+  margin: auto;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
 .value {
   position: absolute;
   left: 50%;

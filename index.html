@@ -17,6 +17,8 @@
 
       var options = {
         chartTitle: 'My Chart',
+        chartTitleSize: '<h2>',
+        chartTitleColor: 'black',
         chartWidth: 500,
         chartHeight: 400,
         barSpacing: 3,
@@ -27,7 +29,7 @@
       };
 
       $( function() {
-        drawBarChart(data, options);
+        drawBarChart(data, options, '<container>');
       });
     </script>
   </body>
