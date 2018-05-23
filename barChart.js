@@ -1,3 +1,8 @@
+const TOP = 100;
+const CENTER = 50;
+const BOTTOM = 0;
+
+var lineHeight;
 
 function drawBarChart(data, options, element){
   var chartTitleTag = $( options.chartTitleSize ).html(options.chartTitle);
@@ -13,6 +18,10 @@ function drawBarChart(data, options, element){
   chartTitleTag.appendTo(body);
   chartContainer.appendTo(body);
 
+  var measureTag = $( 'div', {
+      //TODO
+  });
+
   $.each( data, function( index, value ){
     var barTag = $( '<div>', {
       'class': 'bar ' + options.barColor,
@@ -23,10 +32,15 @@ function drawBarChart(data, options, element){
         options.barSpacing + 'px'
     });
 
+    if(options.barValuePos == CENTER){
+      lineHeight = 'line-height: ' + (value[0] / options.barValuePos) + '%';
+    }else{
+      lineHeight = 'line-height: ' + ((value[0] / options.barValuePos) - 10) + '%';
+    }
     var valueTag = $( '<div>', {
       'class': 'value',
-      'style': 'color: ' + options.barValueColor +
-        '; bottom: ' + options.barValuePos + '%'
+      'style': 'color: ' + options.barValueColor + '; bottom: ' +
+      options.barValuePos + '%; ' + lineHeight
     }).html(value[0]);
 
     var labelTag = $( '<div>', {
