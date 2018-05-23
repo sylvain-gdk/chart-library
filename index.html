@@ -15,21 +15,22 @@
                   [50, 'value7'], [65, 'value8'], [190, 'value9'],
                   [230, 'value10']];
 
-      var options = {
-        chartTitle: 'My Chart',
-        chartTitleSize: '<h2>',
-        chartTitleColor: 'black',
-        chartWidth: 500,
-        chartHeight: 400,
-        barSpacing: 3,
-        barColor: 'red',
-        barValueColor: 'black',
-        barLabelColor: 'black',
-        barValuePos: TOP
-      };
+      var canada = [[70, 'Quebec'], [100, 'Ontario'], [200, 'Alberta'],
+                  [80, 'Winnipeg'], [180, 'Manitoba'], [140, 'Saskatoon'],
+                  [50, 'New-Brunswick']];
+
+      var options1 = Object.assign({}, defaultOptions);
+      options1.barValuePos = CENTER;
+      options1.barValueColor = 'white';
+      options1.barColor = 'green';
+      options1.barLabelColor = 'blue';
+      options1.chartTitle = 'Canada';
+      options1.chartTitleColor = 'blue';
+      options1.chartTitleSize = '<h1>'
 
       $( function() {
-        drawBarChart(data, options, '<container>');
+        drawBarChart(data, defaultOptions, '<container>');
+        drawBarChart(canada, options1, '<container>');
       });
     </script>
   </body>

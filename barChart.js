@@ -2,6 +2,19 @@ var TOP = 100;
 var CENTER = 50;
 var BOTTOM = 0;
 
+var defaultOptions = {
+  chartTitle: 'My Chart',
+  chartTitleSize: '<h2>',
+  chartTitleColor: 'black',
+  chartWidth: 500,
+  chartHeight: 400,
+  barSpacing: 3,
+  barColor: 'red',
+  barValueColor: 'black',
+  barLabelColor: 'black',
+  barValuePos: TOP
+};
+
 function drawBarChart(data, options, element){
   var chartTitleTag = $( options.chartTitleSize ).html(options.chartTitle);
   chartTitleTag.attr({
