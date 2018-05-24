@@ -19,17 +19,18 @@
                   [80, 'Winnipeg'], [180, 'Manitoba'], [140, 'Saskatoon'],
                   [50, 'New-Brunswick']];
 
-      var options1 = Object.assign({}, defaultOptions);
+      var options1 = Object.assign({}, options);
+      options1.chartHeight = 225;
+      options1.chartTitle = 'Canada';
+      options1.chartTitleSize = '<h1>'
+      options1.chartTitleColor = 'black'
       options1.barValuePos = CENTER;
       options1.barValueColor = 'white';
-      options1.barColor = 'green';
-      options1.barLabelColor = 'blue';
-      options1.chartTitle = 'Canada';
-      options1.chartTitleColor = 'blue';
-      options1.chartTitleSize = '<h1>'
+      options1.barLabelColor = 'black';
+      options1.barColor = 'red';
 
       $( function() {
-        drawBarChart(data, defaultOptions, '<container>');
+        drawBarChart(data, options, '<container>');
         drawBarChart(canada, options1, '<container>');
       });
     </script>

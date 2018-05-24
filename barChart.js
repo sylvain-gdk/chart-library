@@ -2,21 +2,22 @@ var TOP = 100;
 var CENTER = 50;
 var BOTTOM = 0;
 
-var defaultOptions = {
+var options = {
   chartTitle: 'My Chart',
   chartTitleSize: '<h2>',
-  chartTitleColor: 'black',
+  chartTitleColor: 'blue',
   chartWidth: 500,
-  chartHeight: 400,
+  chartHeight: 325,
   barSpacing: 3,
-  barColor: 'red',
+  barColor: 'green',
   barValueColor: 'black',
-  barLabelColor: 'black',
+  barLabelColor: 'blue',
   barValuePos: TOP
 };
 
 function drawBarChart(data, options, element){
   var chartTitleTag = $( options.chartTitleSize ).html(options.chartTitle);
+  var measureSpace = 30;
   chartTitleTag.attr({
     'class': 'title',
     'style': 'color: ' + options.chartTitleColor
@@ -29,9 +30,14 @@ function drawBarChart(data, options, element){
   chartTitleTag.appendTo(body);
   chartContainer.appendTo(body);
 
-  var measureTag = $( 'div', {
-      //TODO
+  var measureTag = $( '<div>', {
+    'class': 'measure',
+    'style': 'width: ' + 20 +
+        'px; height: ' + options.chartHeight + 'px; ' + 'margin-right: ' +
+        10 + 'px'
   });
+  measureSpace = measureSpace + 30;
+  measureTag.appendTo(chartContainer);
 
   $.each( data, function( index, value ){
     var lineHeight = 'color: ' + options.barValueColor +

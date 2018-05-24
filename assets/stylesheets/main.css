@@ -2,14 +2,12 @@
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  padding-top: 20px;
   padding-bottom: 100px;
 }
 
 .title {
   margin: auto;
   text-align: center;
-  padding-bottom: 10px;
 }
 
 .value {
@@ -27,7 +25,16 @@
 
 .bar {
   position: relative;
-  float: left;
+}
+
+.measure {
+  background: repeating-linear-gradient(
+    to top,
+    black,
+    black 1px,
+    transparent 1px,
+    transparent 10%
+  );
 }
 
 .orange {
