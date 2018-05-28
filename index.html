@@ -15,9 +15,9 @@
                   ['value7', 50], ['value8', 65], ['value9', 190],
                   ['value10', 230]];
 
-      var canada = [['Quebec', 70], ['Ontario', 100], ['Alberta', 200],
-                  ['Winnipeg', 80], ['Manitoba', 180], ['Saskatoon', 140],
-                  ['New-Brunswick', 50]];
+      var canada = [['Quebec', 70, 30], ['Ontario', 100, 20], ['Alberta', 200, 30],
+                  ['Winnipeg', 80, 40], ['Manitoba', 180, 50], ['Saskatoon', 140, 30],
+                  ['New-Brunswick', 50, 100]];
 
       var options1 = Object.assign({}, options);
       options1.chartHeight = 225;
@@ -27,7 +27,7 @@
       options1.barValuePos = CENTER;
       options1.barValueColor = 'white';
       options1.barLabelColor = 'black';
-      options1.barColor = 'red';
+      options1.barColor1 = 'red';
 
       $( function() {
         drawBarChart(data, options, '<container>');

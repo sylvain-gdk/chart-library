@@ -24,6 +24,10 @@
   transform-origin: right;
 }
 
+.barStacked {
+  position: relative;
+}
+
 .bar {
   position: relative;
 }

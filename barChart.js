@@ -11,7 +11,9 @@ var options = {
   chartWidth: 500,
   chartHeight: 325,
   barSpacing: 3,
-  barColor: 'green',
+  barColor1: 'green',
+  barColor2: 'blue',
+  barColor3: 'orange',
   barValueColor: 'black',
   barLabelColor: 'blue',
   barValuePos: TOP
@@ -77,30 +79,12 @@ function drawBars(data, options, element){
     data.length)) / data.length;
 
   $.each( data, function( index, value ){
-    // adjusts the position of values inside bars when centered
-    var valueLineHeight = 'color: ' + options.barValueColor +
-      '; bottom: ' + options.barValuePos + '%; line-height: ' +
-      (value[1] / options.barValuePos) + '%';
-
-    // creates a bar element with all its options
-    var barTag = $( '<div>', {
-      'class': 'bar ' + options.barColor,
-      'style': 'width: ' + barWidth + 'px; height: ' + value[1] +
-      'px; ' + 'margin-left: ' + options.barSpacing + 'px; ' +
+    // creates a stacked bar element with all its options
+    var stackedBarTag = $( '<div>', {
+      'class': 'barStacked',
+      'style': 'margin-left: ' + options.barSpacing + 'px; ' +
       'margin-right: ' + options.barSpacing + 'px'
     });
-
-    // creates a value element inside each bars
-    var valueTag = $( '<div>', {
-      'class': 'value',
-      'style': 'color: ' + options.barValueColor + '; bottom: ' +
-      options.barValuePos + '%'
-    }).html(value[1]);
-
-    // applies a different style when centered
-    if(options.barValuePos === CENTER){
-      valueTag.attr('style', valueLineHeight);
-    }
 
     // creates a label element under each bars
     var labelTag = $( '<div>', {
@@ -109,9 +93,42 @@ function drawBars(data, options, element){
         '; bottom: -30px'
     }).html(value[0]);
 
-    valueTag.appendTo(barTag);
-    labelTag.appendTo(barTag);
-    barTag.appendTo(element);
+    for(var i = 1; i < value.length; i++){
+      // adjusts the position of values inside bars when centered
+      var valueLineHeight = 'color: ' + options.barValueColor +
+        '; bottom: ' + options.barValuePos + '%; line-height: ' +
+        (value[1] / options.barValuePos) + '%';
+
+      // creates a bar element with all its options
+      var barTag = $( '<div>', {
+        'style': 'width: ' + barWidth + 'px; height: ' + value[i] +
+        'px;'
+      });
+      if(i == 1){
+        barTag.attr('class', 'bar ' +  options.barColor1);
+      }else if(i == 2){
+        barTag.attr('class', 'bar ' +  options.barColor2);
+      }else{
+        barTag.attr('class', 'bar ' +  options.barColor2);
+      }
+
+      // creates a value element inside each bars
+      var valueTag = $( '<div>', {
+        'class': 'value',
+        'style': 'color: ' + options.barValueColor + '; bottom: ' +
+        options.barValuePos + '%'
+      }).html(value[i]);
+
+      // applies a different style when centered
+      if(options.barValuePos === CENTER){
+        valueTag.attr('style', valueLineHeight);
+      }
+
+      valueTag.appendTo(barTag);
+      labelTag.appendTo(barTag);
+      barTag.appendTo(stackedBarTag);
+    }
+    stackedBarTag.appendTo(element);
   });
 }
 
