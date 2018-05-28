@@ -38,8 +38,8 @@ function drawScale(data, options, element){
 
   // finds the largest value in the chart
   $.each( data, function( index, value ){
-    if(max < value[0]){
-      max = value[0];
+    if(max < value[1]){
+      max = value[1];
     }
   });
 
@@ -80,12 +80,12 @@ function drawBars(data, options, element){
     // adjusts the position of values inside bars when centered
     var valueLineHeight = 'color: ' + options.barValueColor +
       '; bottom: ' + options.barValuePos + '%; line-height: ' +
-      (value[0] / options.barValuePos) + '%';
+      (value[1] / options.barValuePos) + '%';
 
     // creates a bar element with all its options
     var barTag = $( '<div>', {
       'class': 'bar ' + options.barColor,
-      'style': 'width: ' + barWidth + 'px; height: ' + value[0] +
+      'style': 'width: ' + barWidth + 'px; height: ' + value[1] +
       'px; ' + 'margin-left: ' + options.barSpacing + 'px; ' +
       'margin-right: ' + options.barSpacing + 'px'
     });
@@ -95,7 +95,7 @@ function drawBars(data, options, element){
       'class': 'value',
       'style': 'color: ' + options.barValueColor + '; bottom: ' +
       options.barValuePos + '%'
-    }).html(value[0]);
+    }).html(value[1]);
 
     // applies a different style when centered
     if(options.barValuePos === CENTER){
@@ -107,7 +107,7 @@ function drawBars(data, options, element){
       'class': 'label',
       'style': 'color: ' + options.barLabelColor +
         '; bottom: -30px'
-    }).html(value[1]);
+    }).html(value[0]);
 
     valueTag.appendTo(barTag);
     labelTag.appendTo(barTag);
