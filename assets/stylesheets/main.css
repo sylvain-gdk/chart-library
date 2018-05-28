@@ -24,18 +24,14 @@
   transform-origin: right;
 }
 
-.barStacked {
-  position: relative;
-}
-
 .bar {
   position: relative;
 }
 
 .scale {
   position: absolute;
-  transform: translate(-300px, 15px);
-  font-size: 18px;
+  transform: translate(-300px, -14%);
+  font-size: 16px;
   text-align: right;
 }
 

@@ -1,15 +1,15 @@
-// position of the chart values inside each bars
+// Position of the chart values inside each bars in %
 var TOP = 100;
 var CENTER = 50;
 var BOTTOM = 0;
 
-// design options for the chart
+// Default design options for the chart
 var options = {
   chartTitle: 'My Chart',
   chartTitleSize: '<h2>',
   chartTitleColor: 'blue',
   chartWidth: 500,
-  chartHeight: 325,
+  chartHeight: 300,
   barSpacing: 3,
   barColor1: 'green',
   barColor2: 'blue',
@@ -19,74 +19,83 @@ var options = {
   barValuePos: TOP
 };
 
-// draws a scale on le left side of the chart
+// Draws a scale on le left side of the chart
 function drawScale(data, options, element){
-  // largest value in the chart
+  // Largest value in the chart
   var max = 0;
-  // decreasing scale values
+  // Decreasing scale values
   var scaleDecrease = 0;
-  // space between scale values
+  // Space between scale values
   var scaleSpace = 0;
-  // difference between each scale values
+  // Difference between each scale values
   var scaleStep = 0;
 
-  // lines that will appear behind the chart
+  // Lines that will appear behind the chart
   var lineTag = $( '<div>', {
     'class': 'lines',
     'style': 'width: ' + (options.chartWidth + 30) +
-      'px; height: ' + (options.chartHeight - 25) + 'px'
+      'px; height: ' + options.chartHeight + 'px'
   });
   lineTag.appendTo(element);
 
-  // finds the largest value in the chart
+  // Finds the largest value in the chart and
+  // combines values in case of multiple values per bar (stacked)
   $.each( data, function( index, value ){
-    if(max < value[1]){
-      max = value[1];
+    var tempValue = 0;
+    if(value[3]){
+      tempValue = value[1] + value[2] + value[3];
+    }else if(value[2]){
+      tempValue = value[1] + value[2];
+    }else{
+      tempValue = value[1];
+    }
+    if(max < tempValue){
+      max = tempValue;
     }
   });
+  // Adjusts steps depending on the largest scale value
+  scaleStep = max / 10;
 
-  // establishes scale amounts for 10 steps
+  // Establishes scale amounts for 10 steps
   for(var i = 0; i < 10; i++){
-    // creates a scale element for each steps
+    // Creates a scale element for each steps
     var scaleTag = $( '<div>' ).html(function() {
-      // adjusts steps depending on the largest scale value
-      scaleStep = max / 10;
-      // adjusts space depending on steps
+      // Adjusts space between values depending on steps
       scaleSpace += scaleStep;
-      // adjusts the amount for every step
+      // Adjusts the amount for every step
       if(scaleDecrease < scaleStep){
         scaleDecrease = scaleStep;
       }else{
         scaleDecrease += scaleStep;
       }
-      // returns a scale that depends on the largest value in the chart
+      // Returns a scale based on the largest value in the chart
       // decreasing until it reaches 0
       return max - scaleDecrease;
     }).attr({
       'class': 'scale',
-      'style': 'width: 30px; height: '
-      + options.chartHeight + 'px; ' + 'margin-top: ' + scaleSpace  + 'px'
+      'style': 'width: 30px; height: ' + options.chartHeight +
+        'px; ' + 'margin-top: ' + (scaleSpace + scaleStep) + 'px'
     });
     scaleTag.appendTo(element);
   }
 }
 
-// draws each bars inside a chart based on the data argument
+// Draws each bars inside a chart based on the arguments
 function drawBars(data, options, element){
-  // establishes the width for each bars based on the amount of
+  // Establishes the width for each bars based on the amount of
   // values in the chart and the charts' width
   var barWidth = (options.chartWidth - (options.barSpacing *
     data.length)) / data.length;
 
   $.each( data, function( index, value ){
-    // creates a stacked bar element with all its options
+    // Creates a stacked bar element with all its options
     var stackedBarTag = $( '<div>', {
-      'class': 'barStacked',
+      'class': 'bar',
       'style': 'margin-left: ' + options.barSpacing + 'px; ' +
-      'margin-right: ' + options.barSpacing + 'px'
+        'margin-right: ' + options.barSpacing + 'px'
     });
 
-    // creates a label element under each bars
+    // Creates a label element under each bars
     var labelTag = $( '<div>', {
       'class': 'label',
       'style': 'color: ' + options.barLabelColor +
@@ -94,32 +103,32 @@ function drawBars(data, options, element){
     }).html(value[0]);
 
     for(var i = 1; i < value.length; i++){
-      // adjusts the position of values inside bars when centered
+      // Adjusts the position of values inside bars when centered
       var valueLineHeight = 'color: ' + options.barValueColor +
         '; bottom: ' + options.barValuePos + '%; line-height: ' +
         (value[1] / options.barValuePos) + '%';
 
-      // creates a bar element with all its options
+      // Creates a bar element with all its options
       var barTag = $( '<div>', {
-        'style': 'width: ' + barWidth + 'px; height: ' + value[i] +
-        'px;'
+        'style': 'width: ' + barWidth + 'px; height: ' + value[i] + 'px;'
       });
-      if(i == 1){
+      // Applies multiple colors to stacked bars
+      if(i === 1){
         barTag.attr('class', 'bar ' +  options.barColor1);
-      }else if(i == 2){
+      }else if(i === 2){
         barTag.attr('class', 'bar ' +  options.barColor2);
       }else{
         barTag.attr('class', 'bar ' +  options.barColor2);
       }
 
-      // creates a value element inside each bars
+      // Creates a value element inside each bars
       var valueTag = $( '<div>', {
         'class': 'value',
         'style': 'color: ' + options.barValueColor + '; bottom: ' +
-        options.barValuePos + '%'
+          options.barValuePos + '%'
       }).html(value[i]);
 
-      // applies a different style when centered
+      // Applies a different style when centered
       if(options.barValuePos === CENTER){
         valueTag.attr('style', valueLineHeight);
       }
@@ -132,19 +141,19 @@ function drawBars(data, options, element){
   });
 }
 
-// draws a chart based on data passed as arguments
+// Draws a chart based on data passed as arguments
 function drawBarChart(data, options, element){
-  // creates a title element above the chart
+  // Creates a title element above the chart
   var chartTitleTag = $( options.chartTitleSize ).html(options.chartTitle);
   chartTitleTag.attr({
     'class': 'title',
     'style': 'color: ' + options.chartTitleColor
   });
 
-  // creates the chart container
+  // Creates the chart container
   var chartContainer = $( element, {
     'class': 'chart ' + 'width: ' + options.chartWidth + 'px;' +
-      ' height: ' + options.chartHeight + 'px'
+      ' height: ' + (options.chartHeight + 25) + 'px'
   });
 
   var body = $( 'body' );
