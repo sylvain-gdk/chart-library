@@ -3,13 +3,14 @@ var TOP = 100;
 var CENTER = 50;
 var BOTTOM = 0;
 
+var chartHeight = 0;
+
 // Default design options for the chart
 var options = {
-  chartTitle: 'My Chart',
+  chartTitle: 'My Default Chart',
   chartTitleSize: '<h2>',
   chartTitleColor: 'blue',
   chartWidth: 500,
-  chartHeight: 300,
   barSpacing: 3,
   barColor1: 'green',
   barColor2: 'blue',
@@ -30,14 +31,6 @@ function drawScale(data, options, element){
   // Difference between each scale values
   var scaleStep = 0;
 
-  // Lines that will appear behind the chart
-  var lineTag = $( '<div>', {
-    'class': 'lines',
-    'style': 'width: ' + (options.chartWidth + 30) +
-      'px; height: ' + options.chartHeight + 'px'
-  });
-  lineTag.appendTo(element);
-
   // Finds the largest value in the chart and
   // combines values in case of multiple values per bar (stacked)
   $.each( data, function( index, value ){
@@ -55,6 +48,16 @@ function drawScale(data, options, element){
   });
   // Adjusts steps depending on the largest scale value
   scaleStep = max / 10;
+  // Sets chart height to the highest value
+  chartHeight = max;
+
+  // Lines that will appear behind the chart
+  var lineTag = $( '<div>', {
+    'class': 'lines',
+    'style': 'width: ' + (options.chartWidth + 30) +
+      'px; height: ' + chartHeight + 'px'
+  });
+  lineTag.appendTo(element);
 
   // Establishes scale amounts for 10 steps
   for(var i = 0; i < 10; i++){
@@ -73,8 +76,8 @@ function drawScale(data, options, element){
       return max - scaleDecrease;
     }).attr({
       'class': 'scale',
-      'style': 'width: 30px; height: ' + options.chartHeight +
-        'px; ' + 'margin-top: ' + (scaleSpace + scaleStep) + 'px'
+      'style': 'width: 30px; height: ' + chartHeight +
+        'px; ' + 'margin-top: ' + scaleSpace + 'px'
     });
     scaleTag.appendTo(element);
   }
@@ -118,7 +121,7 @@ function drawBars(data, options, element){
       }else if(i === 2){
         barTag.attr('class', 'bar ' +  options.barColor2);
       }else{
-        barTag.attr('class', 'bar ' +  options.barColor2);
+        barTag.attr('class', 'bar ' +  options.barColor3);
       }
 
       // Creates a value element inside each bars
@@ -137,7 +140,8 @@ function drawBars(data, options, element){
       labelTag.appendTo(barTag);
       barTag.appendTo(stackedBarTag);
     }
-    stackedBarTag.appendTo(element);
+    stackedBarTag.appendTo(element).hide();
+    stackedBarTag.slideDown(1200);
   });
 }
 
@@ -153,7 +157,7 @@ function drawBarChart(data, options, element){
   // Creates the chart container
   var chartContainer = $( element, {
     'class': 'chart ' + 'width: ' + options.chartWidth + 'px;' +
-      ' height: ' + (options.chartHeight + 25) + 'px'
+      ' height: ' + (chartHeight + 25) + 'px'
   });
 
   var body = $( 'body' );
