@@ -30,7 +30,6 @@
 
 .scale {
   position: absolute;
-  transform: translate(-300px, -10px);
   font-size: 16px;
   text-align: right;
 }

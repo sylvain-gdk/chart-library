@@ -15,14 +15,30 @@
                   ['value7', 50], ['value8', 65], ['value9', 190],
                   ['value10', 230]];
 
-      var canada = [['Quebec', 40, 50, 30], ['Ontario', 75, 40, 35],
+      var canada = [['value3', 280],['value4', 200], ['value5', 80],
+                    ['value6', 300], ['value7', 50], ['value8', 65]];
+
+      var stacked = [['Quebec', 40, 50, 30], ['Ontario', 75, 40, 35],
                     ['Alberta', 100, 60, 40], ['Winnipeg', 80, 40, 30],
                     ['Manitoba', 80, 50, 40], ['Saskatoon', 40, 30, 60],
                     ['New-Brunswick', 50, 50, 50]];
 
+      var canadaOptions = {
+        chartTitle: 'Canada',
+        chartTitleSize: '<h1>',
+        chartTitleColor: 'red',
+        chartWidth: 300,
+        barSpacing: 5,
+        barColor1: 'red',
+        barColor2: 'blue',
+        barColor3: 'orange',
+        barValueColor: 'white',
+        barLabelColor: 'black',
+        barValuePos: BOTTOM
+      };
+
       var options1 = Object.assign({}, options);
-      options1.chartTitle = 'Canada';
-      options1.chartTitleSize = '<h1>'
+      options1.chartTitle = 'Stacked Example';
       options1.chartTitleColor = 'black'
       options1.barValuePos = CENTER;
       options1.barValueColor = 'white';
@@ -33,7 +49,8 @@
 
       $( function() {
         drawBarChart(data, options, '<container>');
-        drawBarChart(canada, options1, '<container>');
+        drawBarChart(canada, canadaOptions, '<container>');
+        drawBarChart(stacked, options1, '<container>');
       });
     </script>
   </body>

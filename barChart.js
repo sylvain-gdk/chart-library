@@ -77,7 +77,7 @@ function drawScale(data, options, element){
     }).attr({
       'class': 'scale',
       'style': 'width: 30px; height: ' + chartHeight +
-        'px; ' + 'margin-top: ' + scaleSpace + 'px'
+        'px; ' + 'margin-top: ' + scaleSpace + 'px; transform: translate(' + (-(options.chartWidth / 2) - 40) + 'px, -10px)'
     });
     scaleTag.appendTo(element);
   }
