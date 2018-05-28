@@ -28,9 +28,9 @@
   position: relative;
 }
 
-.measure {
+.scale {
   position: absolute;
-  transform: translate(-310px, 15px);
+  transform: translate(-300px, 15px);
   font-size: 18px;
   text-align: right;
 }
@@ -44,7 +44,6 @@
     transparent 1px,
     transparent 10%
   );
-  transform: translate(0px);
 }
 
 .orange {
